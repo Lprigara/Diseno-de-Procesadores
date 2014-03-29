@@ -1,0 +1,28 @@
+OPERACIONES DE LA CPU MONOCICLO:
+ALU 		→ <registrodestino:4><registro_op:4><registro_op:4><opcode:4>xx0xxx
+CARGA 		→ <registro:4><valor_cte:8><opcode:4>xx1000
+SALTO ABS 	→ <direccion_a_saltar:10><opcode:6>101001
+SALTO COND 	→ <direccion_a_saltar:10><opcode:6>101010
+
+#bucle for i=0;i==3;i++ infinito
+#inicializacion
+0001_0000_0000_1000	#Cargamos 0 en Reg.1	i
+0010_0000_0001_1000	#Cargamos 1 en Reg.2 para hacer i++
+0011_0000_0011_1000	#Cargamos 3 en Reg.3	para comparar con i
+#inicio del bucle
+0100_0011_0001_0011	#Restamos Reg 1 y 3  en Reg.4
+0000_0010_0010_1010	#Saltamos al final del bucle si se ha activado z (si i=3)
+0011_0010_0001_0010	#Sumamos Reg 1 y 2 en Reg.4
+0001_0100_0000_0000 #Asignamos Reg.4 a Reg.1 (i)
+0000_0000_1110_1001	#Saltamos al inicio del bucle
+#final del bucle
+zzzz_zzzz_zzzz_zzzz
+
+#Pequeño programa de prueba para probar salto condicional
+0001_0000_0101_1000	#Cargamos 5 en Reg.1
+0111_0000_0010_1000	#Cargamos 2 en Reg.7
+1000_0000_0010_1000	#Cargamos 2 en Reg.8
+1001_0111_1000_0011	#Restamos Reg 7 y 8  en Reg.9
+0000_0000_0010_1010	#Saltamos (cond.) a la pos 0 de memoria
+0001_0000_0010_1000	#Cargamos 2 en Reg.1
+0010_0000_0011_1000	#Cargamos 3 en Reg.2
